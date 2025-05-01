@@ -23,7 +23,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.16",
-    "mod-remapping-api": "1.26.0",
+    "mod-remapping-api": ">=1.26.0",
     "wfvaio": ">=1.2.1"
   }
 }
