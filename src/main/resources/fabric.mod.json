@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "id": "unnamed-cross-intermediary-remapper",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Cross Intermediary remapper",
+  "description": "",
   "authors": [
-    "Me!"
+    "CatCore"
   ],
   "contact": {
-    "homepage": "https://legacyfabric.net/",
-    "sources": "https://github.com/Legacy-Fabric/fabric-example-mod"
+    "homepage": "https://github.com/FabricCompatibilityLayers/unnamed-cross-intermediary-remapper",
+    "sources": "https://github.com/FabricCompatibilityLayers/unnamed-cross-intermediary-remapper"
   },
   "license": "CC0-1.0",
   "icon": "assets/unnamed-cross-intermediary-remapper/icon.png",
