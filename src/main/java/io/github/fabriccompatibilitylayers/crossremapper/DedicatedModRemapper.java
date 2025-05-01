@@ -130,6 +130,51 @@ public class DedicatedModRemapper implements ModRemapper {
 
     @Override
     public void registerPostVisitors(VisitorInfos visitorInfos) {
+        String variantName = "io/github/fabriccompatibilitylayers/crossremapper/helpers/" + variant + "MappingResolver";
 
+        visitorInfos.registerMethodInvocation(
+                "net/fabricmc/loader/api/MappingResolver",
+                "mapClassName",
+                "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                VisitorInfos.classMember(
+                        variantName,
+                        "mapClassName",
+                        "(Lnet/fabricmc/loader/api/MappingResolver;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                        true
+                )
+        );
+        visitorInfos.registerMethodInvocation(
+                "net/fabricmc/loader/api/MappingResolver",
+                "unmapClassName",
+                "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                VisitorInfos.classMember(
+                        variantName,
+                        "unmapClassName",
+                        "(Lnet/fabricmc/loader/api/MappingResolver;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                        true
+                )
+        );
+        visitorInfos.registerMethodInvocation(
+                "net/fabricmc/loader/api/MappingResolver",
+                "mapFieldName",
+                "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                VisitorInfos.classMember(
+                        variantName,
+                        "mapFieldName",
+                        "(Lnet/fabricmc/loader/api/MappingResolver;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                        true
+                )
+        );
+        visitorInfos.registerMethodInvocation(
+                "net/fabricmc/loader/api/MappingResolver",
+                "mapMethodName",
+                "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                VisitorInfos.classMember(
+                        variantName,
+                        "mapMethodName",
+                        "(Lnet/fabricmc/loader/api/MappingResolver;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+                        true
+                )
+        );
     }
 }
