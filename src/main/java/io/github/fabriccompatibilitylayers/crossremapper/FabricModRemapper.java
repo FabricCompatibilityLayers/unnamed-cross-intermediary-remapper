@@ -175,7 +175,8 @@ public class FabricModRemapper implements ModRemapper {
 
         JsonObject fabricModJson = modCandidate.getFabricModJson();
 
-        fabricModJson.addProperty("name", "(Remapped) " + fabricModJson.get("name").getAsString());
+        String originalName = fabricModJson.has("name") ? fabricModJson.get("name").getAsString() : fabricModJson.get("id").getAsString();
+        fabricModJson.addProperty("name", "(Remapped) " + originalName);
 
         List<String> toRemove = new ArrayList<>();
 
