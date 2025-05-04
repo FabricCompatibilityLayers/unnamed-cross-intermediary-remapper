@@ -47,7 +47,14 @@ public class FabricModRemapper implements ModRemapper {
         );
     }
 
-    private static final List<String> excludedIds = Arrays.asList("minecraft", "java", "fabricloader", "mixinextras");
+    private static final List<String> excludedIds = Arrays.asList(
+            "minecraft",
+            "java",
+            "fabricloader",
+            "mixinextras",
+            "unnamed-cross-intermediary-remapper",
+            "mod-remapping-api"
+    );
 
     @Override
     public List<ModRemapper> collectSubRemappers(List<ModCandidate> discoveredMods) {
@@ -73,6 +80,10 @@ public class FabricModRemapper implements ModRemapper {
         }
 
         for (ModCandidate mod : candidateMap.values()) {
+            if (excludedIds.contains(mod.getId())) {
+                continue;
+            }
+
             try {
                 extractModCandidate((FabricModCandidate) mod, modMap);
             } catch (IOException | URISyntaxException e) {
@@ -81,7 +92,9 @@ public class FabricModRemapper implements ModRemapper {
         }
 
         Map<FabricVariants, List<ModCandidate>> variantToCandidateMap = candidateMap.values()
-                .stream().collect(Collectors.groupingBy(candidate -> FabricVariants.valueOf(candidate.getType())));
+                .stream()
+                .filter(modCandidate -> !excludedIds.contains(modCandidate.getId()))
+                .collect(Collectors.groupingBy(candidate -> FabricVariants.valueOf(candidate.getType())));
 
         for (FabricVariants variant : FabricVariants.values()) {
 //            if (variant == FabricVariants.UNKNOWN) remappers.add(new DedicatedModRemapper(variant, variantToCandidateMap.getOrDefault(variant, new ArrayList<>())));
