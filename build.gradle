@@ -45,7 +45,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation("maven.modrinth:mod-remapping-api:1.26.0")
-	modImplementation("com.github.thecatcore:WFVAIO:1.2.1")
+	modImplementation("com.github.thecatcore:WFVAIO:1.3.0")
 
 	shadow("com.google.code.gson:gson:2.10") {
 		transitive = false

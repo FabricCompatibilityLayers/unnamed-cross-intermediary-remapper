@@ -72,7 +72,7 @@ public enum IntermediarySources {
     ),
     ORNITHE_V2(
             new FabricVariants[]{
-                    FabricVariants.ORNITHE_V1
+                    FabricVariants.ORNITHE_V2
             },
             new Source[] {
                     new Source(
