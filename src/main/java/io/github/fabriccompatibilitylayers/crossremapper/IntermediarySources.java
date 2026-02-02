@@ -156,6 +156,12 @@ public enum IntermediarySources {
                     return source.versions.get(originalVersion);
                 }
 
+                String sidedVersion = originalVersion + "-" + FabricLoader.getInstance().getEnvironmentType().name().toLowerCase(Locale.ENGLISH);
+
+                if (source.versions.containsKey(sidedVersion)) {
+                    return source.versions.get(sidedVersion);
+                }
+
                 for (Source source1 : source.sources) {
                     if (source1.predicate != null) {
                         try {
