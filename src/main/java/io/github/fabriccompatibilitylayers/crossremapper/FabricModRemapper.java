@@ -221,19 +221,21 @@ public class FabricModRemapper implements ModRemapper {
         FabricVariants variant = FabricVariants.UNKNOWN;
         boolean preRemapped = false;
 
-        try {
-            Manifest manifest = new Manifest(manifestPath.toUri().toURL().openStream());
-            Attributes attributesObject = manifest.getMainAttributes();
-            Map<String, Object> attributes = attributesObject.entrySet()
-                    .stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
+        if (manifestPath != null) {
+            try {
+                Manifest manifest = new Manifest(Files.newInputStream(manifestPath));
+                Attributes attributesObject = manifest.getMainAttributes();
+                Map<String, Object> attributes = attributesObject.entrySet()
+                        .stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
 
-            variant = WhichFabricVariantAmIOn.identifyVariantFromManifest(attributes);
+                variant = WhichFabricVariantAmIOn.identifyVariantFromManifest(attributes);
 
-            if (attributes.containsKey(FabricConstants.MANIFEST_ENTRY)) {
-                variant = FabricVariants.valueOf((String) attributes.get(FabricConstants.MANIFEST_ENTRY));
-                preRemapped = true;
+                if (attributes.containsKey(FabricConstants.MANIFEST_ENTRY)) {
+                    variant = FabricVariants.valueOf((String) attributes.get(FabricConstants.MANIFEST_ENTRY));
+                    preRemapped = true;
+                }
+            } catch (Throwable ignored) {
             }
-        } catch (Throwable ignored) {
         }
 
         if (!preRemapped && container.getMetadata().containsCustomValue("fabric-loom:generated") &&

@@ -88,12 +88,20 @@ public class DedicatedModRemapper implements ModRemapper {
             try (FileSystem fs = Utils.getJarFileSystem(modCandidate.getDestination())) {
                 Path manifestPath = fs.getPath("/META-INF/MANIFEST.MF");
 
-                Manifest manifest = new Manifest(manifestPath.toUri().toURL().openStream());
+                Manifest manifest;
+
+                if (!Files.exists(manifestPath)) {
+                    manifest = new Manifest();
+                } else {
+                    manifest = new Manifest(Files.newInputStream(manifestPath));
+                }
+
                 Attributes attributesObject = manifest.getMainAttributes();
                 attributesObject.put(Attributes.Name.MANIFEST_VERSION, "1.0.0");
                 attributesObject.put(new Attributes.Name(FabricConstants.MANIFEST_ENTRY), WhichFabricVariantAmIOn.getVariant().toString());
 
-                Files.delete(manifestPath);
+                if (Files.exists(manifestPath)) Files.delete(manifestPath);
+                else if (!Files.exists(manifestPath.getParent())) Files.createDirectories(manifestPath.getParent());
 
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 manifest.write(out);
